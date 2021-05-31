@@ -1,24 +1,33 @@
-import React from "react";
+import { useContext } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import exmplPhoto from "./../static/img/patatoes.jpg";
+import ProductModel from "./../models/product";
+import { CartContext } from "./../CartContext";
+import CartModel from "../models/cart";
 
-const Product = () => {
+const Product = ({ item }: ProductProps) => {
+  const { addToCart } = useContext(CartContext);
+
+  const addProductToCart = () => {
+    const newItem = new CartModel(item.id, 2);
+    addToCart(newItem);
+  };
+
   return (
     <div className="product">
       <img src={exmplPhoto} alt="Just patatoes" />
-      <p className="product__title">Organic patatoes</p>
-      <p className="product__description">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam dolorum
-        reprehenderit provident alias nemo saepe repellendus omnis eaque velit
-        eligendi quaerat sit voluptas accusantium minus, vero dolor odit et
-        quam.
-      </p>
-      <div className="pruduct__button">
+      <p className="product__title">{item.name}</p>
+      <p className="product__description">{item.description}</p>
+      <div className="product__button" onClick={addProductToCart}>
         <FaCartPlus className="product_button_icon" />
-        1.50$
+        {item.price.toFixed(2)}$
       </div>
     </div>
   );
 };
+
+interface ProductProps {
+  item: ProductModel;
+}
 
 export default Product;

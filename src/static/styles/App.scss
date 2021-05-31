@@ -15,7 +15,9 @@ $color5: #23ce6b;
 }
 
 .container {
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  width: auto;
   background: $color4;
+  position: relative;
+  padding-bottom: 200px;
 }
