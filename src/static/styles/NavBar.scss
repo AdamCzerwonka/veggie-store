@@ -1,0 +1,148 @@
+$color1: #272d2d;
+$color2: #a39ba8;
+$color3: #b8c5d6;
+$color4: #edf5fc;
+$color5: #23ce6b;
+
+* {
+  color: $color1;
+}
+
+nav {
+  width: 100%;
+  height: 90px;
+  padding: 10px 20px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 150px auto auto 100px;
+
+  .logo {
+    grid-column-start: 1;
+    img {
+      height: 70px;
+    }
+  }
+
+  .search__bar {
+    grid-column-start: 2;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+
+    .search__bar__icon {
+      margin-right: 10px;
+    }
+
+    .search_bar_input {
+      outline: none;
+      border: none;
+      font-size: 1.2rem;
+      width: 100%;
+    }
+  }
+
+  .links {
+    grid-column-start: 3;
+    justify-self: end;
+    font-size: 1.3rem;
+    width: 350px;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+
+    li {
+      color: $color1;
+      display: inline-block;
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: $color1;
+        position: relative;
+        z-index: 1;
+        padding: 7px;
+
+        &:hover {
+          color: $color4;
+        }
+
+        &:after {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+          width: 100%;
+          height: 1px;
+          content: "";
+          color: transparent;
+          background-color: $color1;
+          visibility: hidden;
+          opacity: 0;
+          z-index: -1;
+          transition: all 0.5s;
+        }
+
+        &:hover::after {
+          opacity: 1;
+          visibility: visible;
+          height: 100%;
+        }
+
+        &.active {
+          color: $color4;
+          &::before {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            content: "";
+            color: transparent;
+            background-color: $color1;
+            z-index: -1;
+          }
+        }
+      }
+    }
+  }
+  .cart {
+    grid-column-start: 4;
+    justify-self: end;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    background: $color1;
+    color: $color4;
+    height: 40px;
+    padding: 5px 10px;
+    transition: all ease-in-out 0.4s;
+
+    .cart__icon {
+      margin-right: 10px;
+      fill: $color4;
+      transition: all ease-in-out 0.4s;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+
+      .cart__icon {
+        fill: $color5;
+      }
+    }
+  }
+}
