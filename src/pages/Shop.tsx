@@ -1,11 +1,18 @@
-import React from "react";
+import { useState } from "react";
 import Product from "./../components/Product";
+import Modal from "./../components/Modal";
 
 import ProductModel from "./../models/product";
 
 import "./../static/styles/Shop.scss";
 
 const Shop = () => {
+  const modalProductDefaultValue = new ProductModel(0, "", "", "", 0);
+  const [showModal, setShowModal] = useState(false);
+  const [modalProduct, setModalProduct] = useState<ProductModel>(
+    modalProductDefaultValue
+  );
+
   const products: ProductModel[] = [
     new ProductModel(
       1,
@@ -17,7 +24,10 @@ const Shop = () => {
     new ProductModel(
       2,
       "Patatoes",
-      "Just patatoes",
+      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam rem ex sed
+      voluptate dolorum cumque tenetur a, voluptatum maiores inventore. Non
+      perferendis ipsa nostrum earum doloribus veniam distinctio magnam
+      quisquam.`,
       "static/media/patatoes.6895aa3f.jpg",
       1.5
     ),
@@ -79,11 +89,30 @@ const Shop = () => {
     ),
   ];
 
+  const addToCart = (product: ProductModel) => {
+    setShowModal(true);
+    setModalProduct(product);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setModalProduct(modalProductDefaultValue);
+  };
+
   return (
     <div className="shop__container">
+      <Modal
+        showModal={showModal}
+        closeModal={closeModal}
+        product={modalProduct}
+      />
       <div className="products__grid">
         {products.map((product) => (
-          <Product key={product.id} item={product} />
+          <Product
+            key={product.id}
+            item={product}
+            addProductToCart={addToCart}
+          />
         ))}
       </div>
     </div>
