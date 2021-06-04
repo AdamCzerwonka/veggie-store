@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import ProductModel from "../models/product";
+import CartModel from "../models/cart";
 
 import "./../static/styles/Modal.scss";
 
-const Modal = ({ showModal, closeModal, product }: IModelProps) => {
+const Modal = ({ showModal, closeModal, product, addToCart }: IModelProps) => {
   const [amount, setAmount] = useState(0.5);
   const [price, setPrice] = useState(0);
 
@@ -32,6 +33,12 @@ const Modal = ({ showModal, closeModal, product }: IModelProps) => {
     if (amount < 0.5) {
       setAmount(0.5);
     }
+  };
+
+  const addToCartHandler = () => {
+    const cartItem = new CartModel(product.id, amount);
+
+    addToCart(cartItem);
   };
 
   return (
@@ -63,7 +70,9 @@ const Modal = ({ showModal, closeModal, product }: IModelProps) => {
                 />
                 <FaPlus className="amount__icon" onClick={increaceAmount} />
               </div>
-              <div>Add to cart {price.toFixed(2)}$</div>
+              <div className="modal__button" onClick={addToCartHandler}>
+                Add to cart {price.toFixed(2)}$
+              </div>
             </div>
           </div>
         </div>
@@ -76,6 +85,7 @@ interface IModelProps {
   showModal: boolean;
   closeModal: Function;
   product: ProductModel;
+  addToCart: Function;
 }
 
 export default Modal;

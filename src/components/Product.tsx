@@ -1,13 +1,8 @@
-import { useContext } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import exmplPhoto from "./../static/img/patatoes.jpg";
 import ProductModel from "./../models/product";
-import { CartContext } from "./../CartContext";
-import CartModel from "../models/cart";
 
 const Product = ({ item, addProductToCart }: ProductProps) => {
-  const { addToCart } = useContext(CartContext);
-
   return (
     <div className="product">
       <img src={exmplPhoto} alt="Just patatoes" />

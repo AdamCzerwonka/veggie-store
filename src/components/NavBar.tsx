@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { CartContext } from "./../CartContext";
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
 
 import "./../static/styles/NavBar.scss";
@@ -7,6 +8,7 @@ import logo from "./../static/img/johnny_automatic_veggies.svg";
 
 const NavBar = () => {
   const [searchText, setSearchText] = useState("");
+  const { cart } = useContext(CartContext);
 
   return (
     <nav>
@@ -42,6 +44,7 @@ const NavBar = () => {
 
       <div className="cart">
         <FaShoppingCart className="cart__icon" /> Cart
+        <div className="cart__amount">{cart.length}</div>
       </div>
     </nav>
   );

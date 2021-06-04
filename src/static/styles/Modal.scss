@@ -53,9 +53,9 @@ $color5: #23ce6b;
         justify-content: space-between;
 
         .bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           .amount {
             display: flex;
             align-items: center;
@@ -81,6 +81,19 @@ $color5: #23ce6b;
 
             .amount__icon {
               font-size: 1.2rem;
+              cursor: pointer;
+            }
+          }
+          .modal__button {
+            background-color: $color5;
+            padding: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all ease-in-out 0.2s;
+
+            &:hover {
+              transform: scale(1.05);
             }
           }
         }

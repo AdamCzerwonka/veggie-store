@@ -28,7 +28,16 @@ const CartProvider = ({ children }: any) => {
   }, [cart]);
 
   const addToCart = (item: CartModel) => {
-    setCart((prevCart) => [...prevCart, item]);
+    const itemInCart = cart.find((entry) => entry.productId === item.productId);
+
+    if (itemInCart) {
+      const cartCopy = cart.slice();
+      const index = cartCopy.indexOf(itemInCart);
+      cartCopy[index].amount += item.amount;
+      setCart(cartCopy);
+    } else {
+      setCart((prevCart) => [...prevCart, item]);
+    }
   };
 
   const loadCart = () => {

@@ -14,7 +14,7 @@ nav {
   padding: 10px 20px;
   display: grid;
   align-items: center;
-  grid-template-columns: 150px auto auto 100px;
+  grid-template-columns: 150px auto auto 130px;
 
   .logo {
     grid-column-start: 1;
@@ -120,7 +120,7 @@ nav {
   .cart {
     grid-column-start: 4;
     justify-self: end;
-    width: 100px;
+    width: 130px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,11 +130,26 @@ nav {
     height: 40px;
     padding: 5px 10px;
     transition: all ease-in-out 0.4s;
+    cursor: pointer;
 
     .cart__icon {
       margin-right: 10px;
       fill: $color4;
       transition: all ease-in-out 0.4s;
+    }
+
+    .cart__amount {
+      color: $color1;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-left: 10px;
+      background: $color4;
+      width: 35px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
     }
 
     &:hover {

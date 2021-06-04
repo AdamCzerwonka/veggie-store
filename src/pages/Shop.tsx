@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Product from "./../components/Product";
 import Modal from "./../components/Modal";
+import { CartContext } from "./../CartContext";
 
 import ProductModel from "./../models/product";
 
 import "./../static/styles/Shop.scss";
+import CartModel from "../models/cart";
 
 const Shop = () => {
   const modalProductDefaultValue = new ProductModel(0, "", "", "", 0);
@@ -12,6 +14,7 @@ const Shop = () => {
   const [modalProduct, setModalProduct] = useState<ProductModel>(
     modalProductDefaultValue
   );
+  const { addToCart } = useContext(CartContext);
 
   const products: ProductModel[] = [
     new ProductModel(
@@ -89,7 +92,7 @@ const Shop = () => {
     ),
   ];
 
-  const addToCart = (product: ProductModel) => {
+  const openModal = (product: ProductModel) => {
     setShowModal(true);
     setModalProduct(product);
   };
@@ -99,19 +102,25 @@ const Shop = () => {
     setModalProduct(modalProductDefaultValue);
   };
 
+  const pushItemToCart = (cartItem: CartModel) => {
+    addToCart(cartItem);
+    closeModal();
+  };
+
   return (
     <div className="shop__container">
       <Modal
         showModal={showModal}
         closeModal={closeModal}
         product={modalProduct}
+        addToCart={pushItemToCart}
       />
       <div className="products__grid">
         {products.map((product) => (
           <Product
             key={product.id}
             item={product}
-            addProductToCart={addToCart}
+            addProductToCart={openModal}
           />
         ))}
       </div>
