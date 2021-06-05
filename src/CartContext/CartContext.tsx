@@ -5,7 +5,8 @@ import IInitialState from "./IInitialState";
 const initialState: IInitialState = {
   cart: [],
   addToCart: () => {},
-  loadCart: () => {},
+  deleteItem: (item: CartModel) => {},
+  editItem: (item: CartModel) => {},
 };
 
 export const CartContext = createContext(initialState);
@@ -40,22 +41,28 @@ const CartProvider = ({ children }: any) => {
     }
   };
 
-  const loadCart = () => {
-    console.log("asdsasad");
+  const deleteItem = (item: CartModel) => {
+    const filteredCart = cart.filter(
+      (cartItem) => cartItem.productId !== item.productId
+    );
+    setCart(filteredCart);
+  };
 
-    const sessionJSON = localStorage.getItem("cart");
+  const editItem = (item: CartModel) => {
+    const itemInCart = cart.find((entry) => entry.productId === item.productId);
 
-    console.log(sessionJSON);
-
-    if (sessionJSON !== null) {
-      const cartInSession: CartModel[] = JSON.parse(sessionJSON);
-
-      setCart((prevCart) => [...cartInSession]);
+    if (itemInCart) {
+      const cartCopy = cart.slice();
+      const index = cartCopy.indexOf(itemInCart);
+      cartCopy[index].amount = item.amount;
+      setCart(cartCopy);
+    } else {
+      return;
     }
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, loadCart }}>
+    <CartContext.Provider value={{ cart, addToCart, deleteItem, editItem }}>
       {children}
     </CartContext.Provider>
   );

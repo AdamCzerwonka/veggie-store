@@ -42,10 +42,12 @@ const NavBar = () => {
         </li>
       </ul>
 
-      <div className="cart">
-        <FaShoppingCart className="cart__icon" /> Cart
-        <div className="cart__amount">{cart.length}</div>
-      </div>
+      <NavLink to="/cart">
+        <div className="cart">
+          <FaShoppingCart className="cart__icon" /> Cart
+          <div className="cart__amount">{cart.length}</div>
+        </div>
+      </NavLink>
     </nav>
   );
 };
