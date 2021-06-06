@@ -14,6 +14,16 @@ npm install
 npm start
 ```
 
+You can also use docker
+
+```
+# Build image
+docker build -t sample:dev .
+
+# Run dev server
+docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true sample:dev
+```
+
 # Working so far
 
 - Main shop page displays item (for now hardcoded in frontend)
