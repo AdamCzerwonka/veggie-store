@@ -1,0 +1,40 @@
+$color1: #272d2d;
+$color2: #a39ba8;
+$color3: #b8c5d6;
+$color4: #edf5fc;
+$color5: #23ce6b;
+
+.order__container {
+  display: flex;
+  justify-content: center;
+  form {
+    .input__wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      input {
+        width: 450px;
+        outline: none;
+        border: 5px solid $color3;
+        border-radius: 7px;
+        font-size: 1.2rem;
+        padding: 10px;
+
+        &.error {
+          border-color: #cf2f23;
+        }
+
+        &.correct {
+          border-color: $color5;
+        }
+      }
+
+      span {
+        margin-left: 7px;
+        font-size: 0.95rem;
+        color: $color1;
+      }
+    }
+  }
+}

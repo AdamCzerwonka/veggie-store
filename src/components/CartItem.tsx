@@ -1,9 +1,13 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import CartModel from "../models/cart";
 import { ProductsContext } from "./../ProductsContext";
 
-const CartItem = ({ cartItem, deleteItem, editItem }: ICartItemProps) => {
+const CartItem: React.FC<ICartItemProps> = ({
+  cartItem,
+  deleteItem,
+  editItem,
+}) => {
   const { products } = useContext(ProductsContext);
 
   const [amount, setAmount] = useState(cartItem.amount);
@@ -59,6 +63,7 @@ interface ICartItemProps {
   cartItem: CartModel;
   deleteItem: Function;
   editItem: Function;
+  setCartTotal: Function;
 }
 
 export default CartItem;

@@ -10,13 +10,13 @@ import "./../static/styles/Shop.scss";
 import CartModel from "../models/cart";
 
 const Shop = () => {
-  const modalProductDefaultValue = new ProductModel(0, "", "", "", 0);
+  const modalProductDefaultValue = new ProductModel(0, "", "", { name: "" }, 0);
   const [showModal, setShowModal] = useState(false);
   const [modalProduct, setModalProduct] = useState<ProductModel>(
     modalProductDefaultValue
   );
   const { addToCart } = useContext(CartContext);
-  const { products } = useContext(ProductsContext);
+  const { products, isLoading } = useContext(ProductsContext);
 
   const openModal = (product: ProductModel) => {
     setShowModal(true);
@@ -42,13 +42,15 @@ const Shop = () => {
         addToCart={pushItemToCart}
       />
       <div className="products__grid">
-        {products.map((product) => (
-          <Product
-            key={product.id}
-            item={product}
-            addProductToCart={openModal}
-          />
-        ))}
+        {isLoading && <p>Loading...</p>}
+        {!isLoading &&
+          products.map((product) => (
+            <Product
+              key={product.id}
+              item={product}
+              addProductToCart={openModal}
+            />
+          ))}
       </div>
     </div>
   );

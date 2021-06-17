@@ -1,11 +1,16 @@
+import React from "react";
 import { FaCartPlus } from "react-icons/fa";
-import exmplPhoto from "./../static/img/patatoes.jpg";
 import ProductModel from "./../models/product";
 
-const Product = ({ item, addProductToCart }: ProductProps) => {
+const Product: React.FC<ProductProps> = ({ item, addProductToCart }) => {
+  console.log(item);
+
   return (
     <div className="product">
-      <img src={exmplPhoto} alt="Just patatoes" />
+      <img
+        src={`http://localhost:5000/api/photos/${item.photo.name}`}
+        alt="Just patatoes"
+      />
       <p className="product__title">{item.name}</p>
       <p className="product__description">{item.description}</p>
       <div className="product__button" onClick={() => addProductToCart(item)}>

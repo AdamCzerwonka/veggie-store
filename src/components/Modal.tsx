@@ -52,7 +52,10 @@ const Modal = ({ showModal, closeModal, product, addToCart }: IModelProps) => {
         </div>
         <div className="modal__body__content">
           <div className="content__left">
-            <img src={product.img} alt="" />
+            <img
+              src={`http://localhost:5000/api/photos/${product.photo.name}`}
+              alt=""
+            />
           </div>
           <div className="content__right">
             <div className="top">

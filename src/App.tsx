@@ -8,38 +8,47 @@ import JoinUs from "./pages/JoinUs";
 import Cart from "./pages/Cart";
 import CartProvider from "./CartContext";
 import ProductsProvider from "./ProductsContext";
+import { createClient, Provider } from "urql";
 
 import "./static/styles/App.scss";
+import Order from "./pages/Order";
 
 function App() {
+  const client = createClient({ url: "http://localhost:5000/graphql" });
+
   return (
-    <ProductsProvider>
-      <CartProvider>
-        <Router>
-          <div className="container">
-            <NavBar />
-            <Switch>
-              <Route exact path="/">
-                <Shop />
-              </Route>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/joinus">
-                <JoinUs />
-              </Route>
-              <Route path="/contact">
-                <Contact />
-              </Route>
-              <Route path="/cart">
-                <Cart />
-              </Route>
-            </Switch>
-            <Footer />
-          </div>
-        </Router>
-      </CartProvider>
-    </ProductsProvider>
+    <Provider value={client}>
+      <ProductsProvider>
+        <CartProvider>
+          <Router>
+            <div className="container">
+              <NavBar />
+              <Switch>
+                <Route exact path="/">
+                  <Shop />
+                </Route>
+                <Route path="/about">
+                  <About />
+                </Route>
+                <Route path="/joinus">
+                  <JoinUs />
+                </Route>
+                <Route path="/contact">
+                  <Contact />
+                </Route>
+                <Route path="/cart">
+                  <Cart />
+                </Route>
+                <Route path="/order">
+                  <Order />
+                </Route>
+              </Switch>
+              <Footer />
+            </div>
+          </Router>
+        </CartProvider>
+      </ProductsProvider>
+    </Provider>
   );
 }
 

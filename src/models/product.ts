@@ -3,7 +3,7 @@ export default class ProductModel {
     public id: number,
     public name: string,
     public description: string,
-    public img: string,
+    public photo: { name: string },
     public price: number
   ) {}
 }
