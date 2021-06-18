@@ -1,32 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
 import FormInput from "../components/FormInput";
 
 import "../static/styles/Order.scss";
 
 const Order: React.FC = () => {
-  const [formValues, setFormValues] = useState<any>({});
+  let formValues: any = {};
 
   const handleInput = (propName: string, value: string, isValid: boolean) => {
-    console.log(value);
-
     if (formValues[propName] === undefined) {
       let newObj = {
         data: value,
         isValid: isValid,
       };
-      setFormValues({ ...formValues, [propName]: newObj });
+      formValues = { ...formValues, [propName]: newObj };
     } else {
-      let tmpFormValues = formValues;
-      tmpFormValues[propName]["data"] = value;
-      tmpFormValues[propName]["isValid"] = isValid;
+      formValues[propName]["data"] = value;
+      formValues[propName]["isValid"] = isValid;
+    }
+  };
 
-      setFormValues(tmpFormValues);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let isFormValid = true;
+
+    if (Object.keys(formValues).length !== 9) {
+      isFormValid = false;
+    }
+
+    Object.keys(formValues).forEach((key) => {
+      if (formValues[key]["isValid"] === false) {
+        isFormValid = false;
+      }
+    });
+
+    if (isFormValid) {
+      console.log("val");
+    } else {
+      console.log("no");
     }
   };
 
   return (
     <div className="order__container">
-      <form action="">
+      <form action="" onSubmit={(e) => handleSubmit(e)}>
         <h2>Personal Info</h2>
         <FormInput
           fieldName={"Name"}
@@ -78,6 +95,7 @@ const Order: React.FC = () => {
           regex={/^\d{0,4}$/i}
           inputHandler={handleInput}
         />
+        <input type="submit" value="Next" />
       </form>
     </div>
   );

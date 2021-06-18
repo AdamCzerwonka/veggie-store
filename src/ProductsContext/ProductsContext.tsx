@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import ProductModel from "../models/product";
 import IInitialState from "./IInitalState";
 import { useQuery } from "urql";
 
@@ -29,16 +28,15 @@ const productsQuery = `
 
 const ProductsProvider = ({ children }: any) => {
   const [products, setProducts] = useState(initialState.products);
-  const [result, reexecuteQuery] = useQuery({ query: productsQuery });
+  const [result] = useQuery({ query: productsQuery });
   const [isLoading, setIsLoading] = useState(initialState.isLoading);
 
-  const { data, fetching, error } = result;
+  const { data, error } = result;
 
   useEffect(() => {
     if (!error && data !== undefined) {
       setProducts(data.products);
       setIsLoading(false);
-      console.log(data.products);
     }
   }, [data, error]);
 

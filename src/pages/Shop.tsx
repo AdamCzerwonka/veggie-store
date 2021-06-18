@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Product from "./../components/Product";
 import Modal from "./../components/Modal";
 import { CartContext } from "./../CartContext";
@@ -9,7 +9,7 @@ import ProductModel from "./../models/product";
 import "./../static/styles/Shop.scss";
 import CartModel from "../models/cart";
 
-const Shop = () => {
+const Shop: React.FC = () => {
   const modalProductDefaultValue = new ProductModel(0, "", "", { name: "" }, 0);
   const [showModal, setShowModal] = useState(false);
   const [modalProduct, setModalProduct] = useState<ProductModel>(

@@ -24,8 +24,6 @@ const FormInput: React.FC<FormInputProps> = ({
       }
     } else {
       setIsValid(true);
-      console.log(value);
-
       if (propName) {
         inputHandler(propName, value, true);
       } else {
