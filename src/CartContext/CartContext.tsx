@@ -7,6 +7,7 @@ const initialState: IInitialState = {
   addToCart: () => {},
   deleteItem: (item: CartModel) => {},
   editItem: (item: CartModel) => {},
+  clearCart: () => {},
 };
 
 export const CartContext = createContext(initialState);
@@ -61,8 +62,14 @@ const CartProvider = ({ children }: any) => {
     }
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, deleteItem, editItem }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, deleteItem, editItem, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

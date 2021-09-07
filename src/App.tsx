@@ -8,6 +8,7 @@ import JoinUs from "./pages/JoinUs";
 import Cart from "./pages/Cart";
 import CartProvider from "./CartContext";
 import ProductsProvider from "./ProductsContext";
+import OrderComplete from "./pages/OrderComplete";
 import { createClient, Provider } from "urql";
 
 import "./static/styles/App.scss";
@@ -41,6 +42,9 @@ function App() {
                 </Route>
                 <Route path="/order">
                   <Order />
+                </Route>
+                <Route path="/order_complete">
+                  <OrderComplete />
                 </Route>
               </Switch>
               <Footer />

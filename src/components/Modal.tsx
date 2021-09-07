@@ -41,6 +41,8 @@ const Modal = ({ showModal, closeModal, product, addToCart }: IModelProps) => {
     addToCart(cartItem);
   };
 
+  console.log(product.photo.name);
+
   return (
     <div className="modal" style={showModal ? { display: "block" } : {}}>
       <div className="model__body">
@@ -52,10 +54,12 @@ const Modal = ({ showModal, closeModal, product, addToCart }: IModelProps) => {
         </div>
         <div className="modal__body__content">
           <div className="content__left">
-            <img
-              src={`http://localhost:5000/api/photos/${product.photo.name}`}
-              alt=""
-            />
+            {product.photo.name && (
+              <img
+                src={`http://localhost:5000/api/photos/${product.photo.name}`}
+                alt=""
+              />
+            )}
           </div>
           <div className="content__right">
             <div className="top">

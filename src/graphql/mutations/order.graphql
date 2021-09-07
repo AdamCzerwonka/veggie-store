@@ -1,0 +1,30 @@
+mutation AddOrder(
+  $name: String!
+  $surname: String!
+  $city: String!
+  $zip: String!
+  $street: String
+  $houseNumber: String!
+  $email: String!
+  $phoneNumber: String!
+  $apartmentNumber: String
+  $items: [AddOrderItemInput!]!
+) {
+  addOrder(
+    input: {
+      name: $name
+      surname: $surname
+      city: $city
+      zip: $zip
+      street: $street
+      houseNumber: $houseNumber
+      email: $email
+      phoneNumber: $phoneNumber
+      apartmentNumber: $apartmentNumber
+      items: $items
+    }
+  ) {
+    status
+    errors
+  }
+}

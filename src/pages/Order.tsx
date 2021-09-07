@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import FormInput from "../components/FormInput";
+import { useAddOrderMutation, AddOrderItemInput } from "../generated/graphql";
+import { CartContext } from "../CartContext";
 
 import "../static/styles/Order.scss";
 
 const Order: React.FC = () => {
+  const [, addOrder] = useAddOrderMutation();
+  const { cart, clearCart } = useContext(CartContext);
+  const history = useHistory();
   let formValues: any = {};
 
   const handleInput = (propName: string, value: string, isValid: boolean) => {
+    propName = propName.charAt(0).toLowerCase() + propName.slice(1);
+
     if (formValues[propName] === undefined) {
       let newObj = {
         data: value,
@@ -19,7 +27,7 @@ const Order: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     let isFormValid = true;
@@ -35,7 +43,42 @@ const Order: React.FC = () => {
     });
 
     if (isFormValid) {
-      console.log("val");
+      let name: string = formValues.name.data;
+      let surname: string = formValues.surname.data;
+      let city: string = formValues.city.data;
+      let zip: string = formValues.zipCode.data;
+      let street: string = formValues.street.data;
+      let houseNumber: string = formValues.houseNumber.data;
+      let email: string = formValues.email.data;
+      let phoneNumber: string = formValues.phoneNumber.data;
+      let apartmentNumber: string | undefined;
+
+      if (formValues.apartmentNumber.data !== "") {
+        apartmentNumber = formValues.apartmentNumber.data;
+      }
+
+      let orderItems: AddOrderItemInput[] = cart;
+      const response = await addOrder({
+        name,
+        surname,
+        city,
+        zip,
+        street,
+        houseNumber,
+        email,
+        phoneNumber,
+        apartmentNumber,
+        items: orderItems,
+      });
+
+      console.log(response.data);
+
+      if (response.data?.addOrder?.status === "succ") {
+        formValues = {};
+        clearCart();
+
+        history.push("/order_complete");
+      }
     } else {
       console.log("no");
     }

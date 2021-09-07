@@ -3,7 +3,7 @@ import { FaCartPlus } from "react-icons/fa";
 import ProductModel from "./../models/product";
 
 const Product: React.FC<ProductProps> = ({ item, addProductToCart }) => {
-  console.log(item);
+  console.log(item.photo.name);
 
   return (
     <div className="product">

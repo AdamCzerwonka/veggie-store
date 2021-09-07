@@ -5,4 +5,5 @@ export default interface IInitialState {
   addToCart(item: CartModel): void;
   deleteItem(item: CartModel): void;
   editItem(item: CartModel): void;
+  clearCart(): void;
 }
